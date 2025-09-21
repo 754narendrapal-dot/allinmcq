@@ -1,0 +1,223 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MCQ Exam — Start your test</title>
+  <style>
+    :root{
+      --blue:#2f6fd8;
+      --light:#e9f0ff;
+      --bg:#f3f7ff;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --radius:14px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#e6f0ff);color:#111}
+    header{
+      background:linear-gradient(180deg,var(--blue),#2a5ec0);
+      color:#fff;padding:22px 36px;display:flex;align-items:center;justify-content:space-between;
+    }
+    .brand{font-weight:700;font-size:28px}
+    nav a{color:rgba(255,255,255,0.95);margin-left:20px;text-decoration:none;font-weight:600}main{padding:48px 36px;max-width:1200px;margin:0 auto;display:flex;gap:32px;align-items:center}
+
+.left{
+  flex:1;min-width:300px;background:transparent;padding:40px 28px;
+}
+.hero-title{font-size:64px;line-height:1.02;margin:12px 0 28px;color:#0f172a}
+.hero-sub{color:var(--muted);font-size:18px;margin-bottom:28px}
+.cta-btn{display:inline-block;background:var(--blue);color:#fff;padding:18px 36px;border-radius:12px;font-size:22px;border:none;cursor:pointer;box-shadow:0 6px 18px rgba(47,111,216,0.24)}
+
+.right{width:380px;display:flex;justify-content:center}
+.student{
+  width:360px;height:520px;border-radius:18px;background:var(--card);box-shadow:0 18px 50px rgba(13, 38, 76, 0.12);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px}
+.student img{width:100%;height:100%;object-fit:cover}
+
+/* Quiz modal / panel */
+.overlay{position:fixed;inset:0;background:rgba(7,12,25,0.45);display:none;align-items:center;justify-content:center;padding:24px}
+.quiz-card{width:100%;max-width:920px;background:var(--card);border-radius:16px;padding:18px 20px;box-shadow:0 20px 60px rgba(12,18,40,0.18);}
+.quiz-header{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1px solid #eef2ff}
+.quiz-title{font-size:20px;font-weight:700}
+.progress{font-size:14px;color:var(--muted)}
+
+.question-area{display:flex;gap:22px;padding:22px 0}
+.q-left{flex:1}
+.q-text{font-size:20px;margin-bottom:18px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option{padding:12px 14px;border-radius:10px;border:1px solid #e6eefc;background:#fbfdff;cursor:pointer}
+.option input{margin-right:8px}
+.controls{display:flex;justify-content:space-between;align-items:center;padding-top:18px}
+.btn{padding:10px 16px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+.btn.secondary{background:#f1f5fb;color:var(--muted)}
+.btn.primary{background:var(--blue);color:#fff}
+
+footer.small{margin-top:14px;font-size:13px;color:var(--muted)}
+
+/* responsive */
+@media (max-width:900px){
+  main{flex-direction:column;align-items:flex-start}
+  .right{width:100%}
+  .student{width:100%;height:300px}
+  .hero-title{font-size:42px}
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">MCQ Exam</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="# THIS SITE MAKES IS STUDY PURPOS">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>  <main>
+    <section class="left">
+      <div class="hero-title">Start your test</div>
+      <div class="hero-sub">Ready to check your knowledge? Click below to begin the MCQ test. You can skip questions and return later. Results are instant.</div><button class="cta-btn" id="startBtn"><A href="file:///C:/Users/OSC/Documents/mcq3.html">Click</button></A>
+
+  <div class="small-features" style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+    <div style="background:#fff;padding:10px 12px;border-radius:10px;border:1px solid #eef5ff">Timed test</div>
+    <div style="background:#fff;padding:10px 12px;border-radius:10px;border:1px solid #eef5ff">Instant results</div>
+    <div style="background:#fff;padding:10px 12px;border-radius:10px;border:1px solid #eef5ff">Save progress</div>
+  </div>
+
+</section>
+
+<aside class="right">
+  <div class="student">
+    <!-- Replace this src with your generated student image (e.g. student.jpg) -->
+    <img src="C:\Users\OSC\Pictures\pngtree-cheerful-student-wearing-casual-attire-holding-books-png-image_14654457.png" alt="Student smiling holding notebook" />
+  </div>
+</aside>
+
+  </main>  <!-- Quiz overlay -->  <div class="overlay" id="overlay">
+    <div class="quiz-card" role="dialog" aria-modal="true" aria-labelledby="quizTitle">
+      <div class="quiz-header">
+        <div>
+          <div id="quizTitle" class="quiz-title">MCQ Test</div>
+          <div class="progress" id="progressLabel">Question 1 of 5</div>
+        </div>
+        <div>
+          <button class="btn secondary" id="closeQuiz">Close</button>
+        </div>
+      </div><div class="question-area">
+    <div class="q-left">
+      <div class="q-text" id="questionText">Loading question...</div>
+
+      <div class="options" id="optionsList">
+        <!-- options injected by JS -->
+      </div>
+
+      <div class="controls">
+        <div>
+          <button class="btn secondary" id="prevBtn">Previous</button>
+          <button class="btn secondary" id="nextBtn">Next</button>
+        </div>
+        <div>
+          <button class="btn primary" id="submitQuiz">Submit</button>
+        </div>
+      </div>
+
+      <div class="small" style="margin-top:8px;color:var(--muted);font-size:13px">Tip: Your answers are saved automatically in this session.</div>
+    </div>
+  </div>
+
+</div>
+
+  </div>  <script>
+    // Simple in-memory quiz data. Replace or extend as needed.
+    const quiz = [
+      { q: "Which of the following is a prime number?", choices:["8","9","13","14"], answer:2 },
+      { q: "HTML stands for?", choices:["Hyper Text Markup Language","HighText Machine Language","Hyperlinks and Text Markup Language","Home Tool Markup Language"], answer:0 },
+      { q: "Which planet is known as the Red Planet?", choices:["Earth","Mars","Jupiter","Venus"], answer:1 },
+      { q: "Which language runs in a web browser?", choices:["Java","C","Python","JavaScript"], answer:3 },
+      { q: "What does CSS stand for?", choices:["Cascading Style Sheets","Computer Style Sheets","Creative Style System","Colorful Style Sheets"], answer:0 }
+    ];
+
+    let current = 0;
+    const answers = Array(quiz.length).fill(null);
+
+    const overlay = document.getElementById('overlay');
+    const startBtn = document.getElementById('startBtn');
+    const closeQuiz = document.getElementById('closeQuiz');
+    const questionText = document.getElementById('questionText');
+    const optionsList = document.getElementById('optionsList');
+    const progressLabel = document.getElementById('progressLabel');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitQuiz = document.getElementById('submitQuiz');
+
+    function openQuiz(){
+      overlay.style.display = 'flex';
+      current = 0;
+      renderQuestion();
+    }
+    function closeQuizFn(){
+      overlay.style.display = 'none';
+    }
+
+    startBtn.addEventListener('click', openQuiz);
+    closeQuiz.addEventListener('click', closeQuizFn);
+
+    prevBtn.addEventListener('click', ()=>{
+      if(current>0){current--; renderQuestion();}
+    });
+    nextBtn.addEventListener('click', ()=>{
+      if(current < quiz.length-1){current++; renderQuestion();}
+    });
+
+// Submit button
+      document.getElementById("submitBtn").onclick = finishQuiz;
+	   });
+
+    function renderQuestion(){
+      const item = quiz[current];
+      questionText.textContent = item.q;
+      progressLabel.textContent = Question ${current+1} of ${quiz.length};
+
+      // build options
+      optionsList.innerHTML = '';
+      item.choices.forEach((c, idx)=>{
+        const id = opt_${current}_${idx};
+        const div = document.createElement('label');
+        div.className = 'option';
+        div.setAttribute('for', id);
+        div.innerHTML = `\n          <input type="radio" name="q${current}" id="${id}" value="${idx}" ${answers[current]===idx? 'checked':''} />\n          <span>${c}</span>\n        `;
+        div.addEventListener('click', (e)=>{
+          // when label clicked, set answer
+          answers[current] = idx;
+          // ensure input checked
+          const input = div.querySelector('input');
+          if(input) input.checked = true;
+        });
+        optionsList.appendChild(div);
+      });
+
+      // scroll focus
+      window.setTimeout(()=>{
+        const first = optionsList.querySelector('.option');
+        if(first) first.scrollIntoView({behavior:'smooth', block:'nearest'});
+      },80);
+    }
+
+    submitQuiz.addEventListener('click', ()=>{
+      // simple scoring
+      let score=0; let answered=0;
+      answers.forEach((a,i)=>{ if(a!==null){answered++; if(a===quiz[i].answer) score++;}});
+
+      // show results
+      const percent = Math.round((score/quiz.length)*100);
+      alert(You answered ${answered} of ${quiz.length} questions.\nScore: ${score}/${quiz.length} (${percent}%));
+      closeQuizFn();
+    });
+
+    // allow escape to close
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeQuizFn(); });
+
+    // render first question only when opened
+  </script></body>
+</html
